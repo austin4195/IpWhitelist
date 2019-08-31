@@ -8,4 +8,5 @@ deploy:
   file: "ipwhitelist.jar"
   skip_cleanup: true
   on:
+    repo: austin4195/IpWhitelist
     tags: true
