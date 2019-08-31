@@ -3,11 +3,15 @@ jdk: openjdk8
 before_install:
  - chmod +x gradlew
 before_deploy:
+  - git config --local user.name "austin4195"
+  - git config --local user.email "austin4195@gmail.com"
+  - export TRAVIS_TAG=${TRAVIS_TAG:-$(date +'%Y%m%d%H%M%S')-$(git log --format=%h -1)}
+  - git tag $TRAVIS_TAG
   - export RELEASE_JAR_FILE=$(ls build/libs/*.jar)
   - echo "Deploying $RELEASE_JAR_FILE to GitHub"
 deploy:
   provider: releases
-  api_key: "c30e383d2c79501b9a80fe981ef9663f780e42b7"
+  api_key: "863480920a5b4af7a9229b4ef941ecbab7cd3447"
   file: "IpWhitelist.jar"
   skip_cleanup: true
   on:
