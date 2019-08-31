@@ -2,11 +2,18 @@ language: java
 jdk: openjdk8
 before_install:
  - chmod +x gradlew
+before_deploy:
+  - export RELEASE_JAR_FILE=$(ls build/libs/*.jar)
+  - echo "Deploying $RELEASE_JAR_FILE to GitHub"
 deploy:
   provider: releases
   api_key: "c30e383d2c79501b9a80fe981ef9663f780e42b7"
-  file: "ipwhitelist.jar"
+  file: "IpWhitelist.jar"
   skip_cleanup: true
   on:
     repo: austin4195/IpWhitelist
+    branches:
+        only:
+        - master
+        - /v\d+\.\d+[a-z]/
     tags: true
